@@ -4,6 +4,7 @@ using ControlPanel_API.Models;
 using ControlPanel_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Net.NetworkInformation;
 
 namespace ControlPanel_API.Repositories.Services
@@ -15,16 +16,16 @@ namespace ControlPanel_API.Repositories.Services
         {
             _context = context;
         }
-        public async Task<Role> AddRole(string roleName, string roleCode, int roleNumber)
+        public async Task<Role> AddRole(Role request)
         {
             try
             {
-                Role role = new Role
+                var role = new Role
                 {
-                    RoleName = roleName,
-                    RoleCode = roleCode,
-                    Status = 1,
-                    RoleNumber = roleNumber,
+                    RoleName = request.RoleName,
+                    RoleCode = request.RoleCode,
+                    RoleNumber = request.RoleNumber,
+                    Status = request.Status,
 
                 };
 
@@ -45,21 +46,21 @@ namespace ControlPanel_API.Repositories.Services
                 var data = _context.tblRole.Where(x => x.RoleId == role.RoleId).FirstOrDefault();
                 if (data != null)
                 {
-                        data.RoleName = role.RoleName;
-                        data.RoleCode = role.RoleCode;
-                        data.RoleNumber = role.RoleNumber;
-                        data.Status = role.Status;
+                    data.RoleName = role.RoleName;
+                    data.RoleCode = role.RoleCode;
+                    data.RoleNumber = role.RoleNumber;
+                    data.Status = role.Status;
 
-                        _context.tblRole.Update(role);
-                        _context.SaveChanges();
+                    _context.tblRole.Update(role);
+                    _context.SaveChanges();
                     _context.Entry(data).State = EntityState.Detached;
                     return await Task.FromResult(role);
-                   
+
                 }
                 else
                 {
                 }
-                    return null;
+                return null;
             }
             catch (Exception ex)
             {
@@ -71,6 +72,26 @@ namespace ControlPanel_API.Repositories.Services
             try
             {
                 return _context.tblRole.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Task<Role> GetRoleByID(int roleId)
+        {
+            try
+            {
+                var data = _context.tblRole.Where(x => x.RoleId == roleId).FirstOrDefault();
+                if (data != null)
+                {
+                    return Task.FromResult(data);
+                }
+                else
+                {
+                    return Task.FromResult<Role>(null);
+                }
 
             }
             catch (Exception ex)

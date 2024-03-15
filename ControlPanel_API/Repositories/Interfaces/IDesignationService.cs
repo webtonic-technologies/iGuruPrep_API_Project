@@ -5,7 +5,8 @@ namespace ControlPanel_API.Repositories.Interfaces
     public interface IDesignationService 
     {
         Task<List<Designation>> GetDesignationList();
-        Task<Designation> AddDesignation(string designationName, string designationCode, int designationNumber);
+        Task<Designation> GetDesignationByID(int DesgnID);
+        Task<Designation> AddDesignation(Designation designation);
         Task<Designation> UpdateDesignation(Designation designation);
     }
 }

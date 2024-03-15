@@ -4,6 +4,7 @@ using ControlPanel_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace ControlPanel_API.Controllers
 {
@@ -27,21 +28,37 @@ namespace ControlPanel_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return NotFound();
+            }
+
+        }
+        [HttpGet("GetRoleById/{roleId}")]
+        public async Task<IActionResult> GetRoleByID(int roleId)
+        {
+            try
+            {
+                return new OkObjectResult(new { data = await _rolelService.GetRoleByID(roleId) });
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
             }
 
         }
 
         [HttpPost("AddRole")]
-        public async Task<ActionResult> AddRole(string roleName, string roleCode, int roleNumber)
+        public async Task<ActionResult> AddRole(Role role)
         {
             try
             {
-                return new OkObjectResult(new { data = await _rolelService.AddRole(roleName, roleCode, roleNumber) });
+                return new OkObjectResult(new { data = await _rolelService.AddRole(role) });
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return new JsonResult("")
+                {
+                    StatusCode = (int)HttpStatusCode.NotAcceptable
+                };
             }
 
         }
@@ -60,7 +77,10 @@ namespace ControlPanel_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return new JsonResult("")
+                {
+                    StatusCode = (int)HttpStatusCode.NotAcceptable
+                };
             }
 
         }

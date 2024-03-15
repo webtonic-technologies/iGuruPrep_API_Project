@@ -13,15 +13,15 @@ namespace ControlPanel_API.Repositories.Services
         {
             _context = context;
         }
-        public async Task<Designation> AddDesignation(string designationName, string designationCode, int designationNumber)
+        public async Task<Designation> AddDesignation(Designation request)
         {
             try
             {
-                Designation designation = new Designation
+                var designation = new Designation
                 {
-                    DesignationName = designationName,
-                    DesgnCode = designationCode,
-                    DesignationNumber = designationNumber,
+                    DesignationName = request.DesignationName,
+                    DesgnCode = request.DesgnCode,
+                    DesignationNumber = request.DesignationNumber,
                     Status = true,
                 };
 
@@ -67,6 +67,27 @@ namespace ControlPanel_API.Repositories.Services
             try
             {
                 return _context.tblDesignation.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public Task<Designation> GetDesignationByID(int DesgnID)
+        {
+            try
+            {
+
+                var data = _context.tblDesignation.Where(x => x.DesgnID == DesgnID).FirstOrDefault();
+                if (data != null)
+                {
+                    return Task.FromResult(data);
+                }
+                else
+                {
+                    return Task.FromResult<Designation>(null);
+                }
             }
             catch (Exception ex)
             {

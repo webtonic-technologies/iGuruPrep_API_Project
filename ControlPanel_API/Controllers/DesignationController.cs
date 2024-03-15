@@ -5,6 +5,7 @@ using ControlPanel_API.Repositories.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ControlPanel_API.Controllers
@@ -30,21 +31,43 @@ namespace ControlPanel_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return new JsonResult("Records Not Found")
+                {
+                    StatusCode = (int)HttpStatusCode.NotFound
+                };
+            }
+
+        }
+        [HttpGet("GetDesignationById/{DesgnID}")]
+        public async Task<IActionResult> GetDesignationByID(int DesgnID)
+        {
+            try
+            {
+                return new OkObjectResult(new { data = await _designationService.GetDesignationByID(DesgnID) });
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult("Records Not Found")
+                {
+                    StatusCode = (int)HttpStatusCode.NotFound
+                };
             }
 
         }
 
         [HttpPost("AddDesignation")]
-        public async Task<IActionResult> AddDesignation(string designationName, string designationCode, int designationNumber)
+        public async Task<IActionResult> AddDesignation(Designation designation)
         {
             try
             {
-                return new OkObjectResult(new { data = await _designationService.AddDesignation(designationName, designationCode, designationNumber) });
+                return new OkObjectResult(new { data = await _designationService.AddDesignation(designation) });
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return new JsonResult("Records Not Found")
+                {
+                    StatusCode = (int)HttpStatusCode.NotAcceptable
+                };
             }
 
         }
@@ -63,7 +86,10 @@ namespace ControlPanel_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message.ToString());
+                return new JsonResult("Records Not Found")
+                {
+                    StatusCode = (int)HttpStatusCode.NotAcceptable
+                };
             }
 
         }
