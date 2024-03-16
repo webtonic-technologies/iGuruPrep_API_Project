@@ -15,6 +15,7 @@ namespace ControlPanel_API.DBContext
         }
         public DbSet<Role> tblRole { get; set; }
         public DbSet<Designation> tblDesignation { get; set; }
+        public DbSet<Magazine> tblMagazine { get; set; }
         //tblEmoyee missing from DB
         // public DbSet<Employee> tblEmployee { get; set; }
     }
