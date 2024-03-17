@@ -19,6 +19,7 @@ builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddScoped<IDesignationService, DesignationService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IMagazineService, MagazineService>();
+builder.Services.AddScoped<IStoryOfTheDayService, StoryOfTheDayService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
