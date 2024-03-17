@@ -1,4 +1,5 @@
 ﻿using Course_API.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Course_API.Repositories.Interface
 {
@@ -9,5 +10,7 @@ namespace Course_API.Repositories.Interface
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
+        void Detach<T>(T entity) where T : class;
     }
 }
+

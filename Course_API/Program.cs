@@ -5,6 +5,7 @@ using Course_API.DBContext;
 using Course_API.Repositories;
 using Course_API.Repositories.Interface;
 using Course_API.Services;
+using Course_API.Services.Interace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 // Add Repositories and UnitOfWork as services
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Add Services
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
 // Add CORS policy
 builder.Services.AddCors(options =>

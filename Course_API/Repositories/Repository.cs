@@ -19,30 +19,36 @@ namespace Course_API.Repositories
             _dbSet = context.Set<T>();
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
-            _dbSet.Remove(entity);
+            await Task.Run(() => _dbSet.Remove(entity));
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _dbSet.ToList();
+            return await _dbSet.ToListAsync();
         }
 
-        public T GetByCondition(Expression<Func<T, bool>> expression)
+        public async Task<T> GetByCondition(Expression<Func<T, bool>> expression)
         {
-            return _dbSet.FirstOrDefault(expression);
+            return await _dbSet.FirstOrDefaultAsync(expression);
         }
 
-        public void Update(T entity)
+        public async Task<T> GetById(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+        public async Task Update(T entity)
         {
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

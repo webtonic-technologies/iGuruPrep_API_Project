@@ -1,5 +1,6 @@
 ﻿using Course_API.DBContext;
 using Course_API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Course_API.Repositories
 {
@@ -35,6 +36,11 @@ namespace Course_API.Repositories
         public void RollbackTransaction()
         {
             _context.Database.RollbackTransaction();
+        }
+
+        public void Detach<T>(T entity) where T : class
+        {
+            _context.Entry(entity).State = EntityState.Detached;
         }
     }
 }

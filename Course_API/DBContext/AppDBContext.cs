@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Course_API.Models;
 
 namespace Course_API.DBContext
 {
@@ -8,5 +9,6 @@ namespace Course_API.DBContext
         {
         }
 
+        public DbSet<Book> tblBook { get; set; }
     }
 }
