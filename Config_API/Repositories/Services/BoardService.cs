@@ -1,10 +1,10 @@
 ﻿using iGuruPrep;
 
-public class BoardRepository : IBoardRepository
+public class BoardService : IBoardService
 {
     private readonly DbContextClass _dbContext;
 
-    public BoardRepository(DbContextClass dbContext)
+    public BoardService(DbContextClass dbContext)
     {
         _dbContext = dbContext;
     }
@@ -115,5 +115,28 @@ public class BoardRepository : IBoardRepository
         catch (Exception ex) {
             return new Board();
         }
-    } 
+    }
+
+    public async Task<bool> StatusActiveInactive(int id)
+    {
+        try
+        {
+            var data = _dbContext.tblBoard.Where(x => x.BoardId == id).FirstOrDefault();
+            if (data != null)
+            {
+                data.Status = false;
+                _dbContext.tblBoard.Update(data);
+                _dbContext.SaveChanges();
+                return  true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
 }

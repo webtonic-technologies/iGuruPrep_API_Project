@@ -1,11 +1,11 @@
 ﻿using Config_API.Models;
 using iGuruPrep;
 
-public class StatusMessageRepository : IStatusMessageRepository
+public class StatusMessageService : IStatusMessageService
 {
     private readonly DbContextClass _dbContext;
 
-    public StatusMessageRepository(DbContextClass dbContext)
+    public StatusMessageService(DbContextClass dbContext)
     {
         _dbContext = dbContext;
     }

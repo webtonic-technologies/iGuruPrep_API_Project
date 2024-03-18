@@ -1,15 +1,14 @@
 ﻿
 using Config_API.Models;
 using iGuruPrep;
-using iGuruPrep.Models;
 
 namespace Config_API.Repositories.Services
 {
-    public class ClassCourseRepository : IClassCourseRepository
+    public class ClassCourseService : IClassCourseService
     {
         private readonly DbContextClass _dbContext;
 
-        public ClassCourseRepository(DbContextClass dbContext)
+        public ClassCourseService(DbContextClass dbContext)
         {
             _dbContext = dbContext;
         }
@@ -120,6 +119,28 @@ namespace Config_API.Repositories.Services
             catch (Exception ex)
             {
                 return new ClassCourseMapping();
+            }
+        }
+        public async Task<bool> StatusActiveInactive(int id)
+        {
+            try
+            {
+                var data = _dbContext.tblClassCourses.Where(x => x.CourseClassMappingID == id).FirstOrDefault();
+                if (data != null)
+                {
+                    data.Status = false;
+                    _dbContext.tblClassCourses.Update(data);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

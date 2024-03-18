@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class StatusMessageController : ControllerBase
 {
-    private readonly IStatusMessageRepository _statusMessageRepository;
+    private readonly IStatusMessageService _statusMessageService;
 
-    public StatusMessageController(IStatusMessageRepository statusMessageRepository)
+    public StatusMessageController(IStatusMessageService statusMessageService)
     {
-        _statusMessageRepository = statusMessageRepository;
+        _statusMessageService = statusMessageService;
     }
 
     [HttpPost]
@@ -18,7 +18,7 @@ public class StatusMessageController : ControllerBase
     {
         try 
         {
-            var data = await _statusMessageRepository.AddUpdateStatusMessage(request);
+            var data = await _statusMessageService.AddUpdateStatusMessage(request);
             if(data != null)
             {
                 return Ok(data);
@@ -41,7 +41,7 @@ public class StatusMessageController : ControllerBase
     {
         try
         {
-            var data = await _statusMessageRepository.GetStatusMessageById(StatusId);
+            var data = await _statusMessageService.GetStatusMessageById(StatusId);
             if (data != null)
             {
                 return Ok(data);

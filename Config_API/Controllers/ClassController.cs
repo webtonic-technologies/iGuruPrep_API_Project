@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class ClassController : ControllerBase
 {
-    private readonly IClassRepository _classRepository;
+    private readonly IClassService _classService;
 
-    public ClassController(IClassRepository classRepository)
+    public ClassController(IClassService classService)
     {
-        _classRepository = classRepository;
+        _classService = classService;
     }
 
     [HttpPost]
@@ -19,7 +19,7 @@ public class ClassController : ControllerBase
     {
         try 
         {
-            var data = await _classRepository.AddUpdateClass(request);
+            var data = await _classService.AddUpdateClass(request);
             if(data != null)
             {
                 return Ok(data);
@@ -42,7 +42,7 @@ public class ClassController : ControllerBase
     {
         try
         {
-            var data = await _classRepository.GetAllClasses();
+            var data = await _classService.GetAllClasses();
             if (data != null)
             {
                 return Ok(data);
@@ -65,7 +65,30 @@ public class ClassController : ControllerBase
     {
         try
         {
-            var data = await _classRepository.GetClassById(ClassId);
+            var data = await _classService.GetClassById(ClassId);
+            if (data != null)
+            {
+                return Ok(data);
+
+            }
+            else
+            {
+                return BadRequest("Bad Request");
+            }
+
+        }
+        catch (Exception e)
+        {
+            return this.BadRequest(e.Message);
+        }
+
+    }
+    [HttpPut("Status/{ClassId}")]
+    public async Task<IActionResult> StatusActiveInactive(int ClassId)
+    {
+        try
+        {
+            var data = await _classService.StatusActiveInactive(ClassId);
             if (data != null)
             {
                 return Ok(data);
