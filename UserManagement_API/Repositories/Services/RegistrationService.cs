@@ -22,7 +22,7 @@ namespace UserManagement_API.Repositories.Services
                 var imageUrl = "";
                 if (request.UserId == 0)
                 {
-                    if(request.Photo != null)
+                    if (request.Photo != null)
                     {
                         var folderName = Path.Combine(_hostingEnvironment.ContentRootPath, "ProjectImages");
                         if (!Directory.Exists(folderName))
@@ -40,7 +40,6 @@ namespace UserManagement_API.Repositories.Services
                     }
                     var newRegistration = new UserRegistration
                     {
-                        UserId = request.UserId,
                         Country = request.Country,
                         Email = request.Email,
                         FirstName = request.FirstName,
