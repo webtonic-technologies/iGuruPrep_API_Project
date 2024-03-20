@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class BoardsController : ControllerBase
 {
-    private readonly IBoardRepository _boardRepository;
+    private readonly IBoardService _boardService;
 
-    public BoardsController(IBoardRepository boardRepository)
+    public BoardsController(IBoardService boardService)
     {
-        _boardRepository = boardRepository;
+        _boardService = boardService;
     }
 
     [HttpPost]
@@ -17,7 +17,7 @@ public class BoardsController : ControllerBase
     {
         try 
         {
-            var data = await _boardRepository.AddUpdateBoard(board);
+            var data = await _boardService.AddUpdateBoard(board);
             if(data != null)
             {
                 return Ok(data);
@@ -40,7 +40,7 @@ public class BoardsController : ControllerBase
     {
         try
         {
-            var data = await _boardRepository.GetAllBoards();
+            var data = await _boardService.GetAllBoards();
             if (data != null)
             {
                 return Ok(data);
@@ -63,7 +63,30 @@ public class BoardsController : ControllerBase
     {
         try
         {
-            var data = await _boardRepository.GetBoardById(BoardId);
+            var data = await _boardService.GetBoardById(BoardId);
+            if (data != null)
+            {
+                return Ok(data);
+
+            }
+            else
+            {
+                return BadRequest("Bad Request");
+            }
+
+        }
+        catch (Exception e)
+        {
+            return this.BadRequest(e.Message);
+        }
+
+    }
+    [HttpPut("Status/{BoardId}")]
+    public async Task<IActionResult> StatusActiveInactive(int BoardId)
+    {
+        try
+        {
+            var data = await _boardService.StatusActiveInactive(BoardId);
             if (data != null)
             {
                 return Ok(data);

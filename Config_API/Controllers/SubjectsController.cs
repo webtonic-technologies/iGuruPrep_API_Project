@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class SubjectsController : ControllerBase
 {
-    private readonly ISubjectRepository _subjectRepository;
+    private readonly ISubjectService _subjectService;
 
-    public SubjectsController(ISubjectRepository subjectRepository)
+    public SubjectsController(ISubjectService subjectService)
     {
-        _subjectRepository = subjectRepository;
+        _subjectService = subjectService;
     }
 
     [HttpPost]
@@ -19,7 +19,7 @@ public class SubjectsController : ControllerBase
     {
         try 
         {
-            var data = await _subjectRepository.AddUpdateSubject(request);
+            var data = await _subjectService.AddUpdateSubject(request);
             if(data != null)
             {
                 return Ok(data);
@@ -42,7 +42,7 @@ public class SubjectsController : ControllerBase
     {
         try
         {
-            var data = await _subjectRepository.GetAllSubjects();
+            var data = await _subjectService.GetAllSubjects();
             if (data != null)
             {
                 return Ok(data);
@@ -65,7 +65,30 @@ public class SubjectsController : ControllerBase
     {
         try
         {
-            var data = await _subjectRepository.GetSubjectById(SubjectId);
+            var data = await _subjectService.GetSubjectById(SubjectId);
+            if (data != null)
+            {
+                return Ok(data);
+
+            }
+            else
+            {
+                return BadRequest("Bad Request");
+            }
+
+        }
+        catch (Exception e)
+        {
+            return this.BadRequest(e.Message);
+        }
+
+    }
+    [HttpPut("Status/{SubjectId}")]
+    public async Task<IActionResult> StatusActiveInactive(int SubjectId)
+    {
+        try
+        {
+            var data = await _subjectService.StatusActiveInactive(SubjectId);
             if (data != null)
             {
                 return Ok(data);
