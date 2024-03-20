@@ -62,10 +62,6 @@ public class BoardService : IBoardService
 
     }
 
-    public Task DeleteBoard(int id)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<List<Board>> GetAllBoards()
     {
@@ -124,10 +120,20 @@ public class BoardService : IBoardService
             var data = _dbContext.tblBoard.Where(x => x.BoardId == id).FirstOrDefault();
             if (data != null)
             {
-                data.Status = false;
-                _dbContext.tblBoard.Update(data);
-                _dbContext.SaveChanges();
-                return  true;
+                if (data.Status == true)
+                {
+                    data.Status = false;
+                    _dbContext.tblBoard.Update(data);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    data.Status = true;
+                    _dbContext.tblBoard.Update(data);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
             }
             else
             {

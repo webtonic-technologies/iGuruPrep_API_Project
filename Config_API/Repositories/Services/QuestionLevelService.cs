@@ -16,15 +16,15 @@ namespace Config_API.Repositories.Services
             try
             {
 
-                if (request.QuestionLevelId == 0)
+                if (request.LevelId == 0)
                 {
                     var newQuestionLevel = new QuestionLevel
                     {
-                        NoOfQuestions = request.NoOfQuestions,
-                        QuestionLevelCode = request.QuestionLevelCode,
-                        QuestionLevelName = request.QuestionLevelName,
-                        Status = request.Status,
-                        SuccessRate = request.SuccessRate
+                       CreatedOn = DateTime.Now,
+                       LevelCode = request.LevelCode,
+                       LevelName = request.LevelName,
+                       PatternCode = request.PatternCode,
+                       Status = request.Status
                     };
 
                     _dbContext.tblDifficultyLevel.Add(newQuestionLevel);
@@ -34,14 +34,13 @@ namespace Config_API.Repositories.Services
                 }
                 else
                 {
-                    var data = _dbContext.tblDifficultyLevel.Where(x => x.QuestionLevelId == request.QuestionLevelId).FirstOrDefault();
+                    var data = _dbContext.tblDifficultyLevel.Where(x => x.LevelId == request.LevelId).FirstOrDefault();
                     if (data != null)
                     {
-                        data.QuestionLevelName = request.QuestionLevelName;
+                        data.LevelName = request.LevelName;
                         data.Status = request.Status;
-                        data.SuccessRate = request.SuccessRate;
-                        data.QuestionLevelCode = request.QuestionLevelCode;
-                        data.NoOfQuestions = request.NoOfQuestions;
+                        data.PatternCode = request.PatternCode;
+                        data.LevelCode = request.LevelCode;
 
                         _dbContext.tblDifficultyLevel.Update(data);
                         _dbContext.SaveChanges();
@@ -67,11 +66,11 @@ namespace Config_API.Repositories.Services
             {
                 var data = _dbContext.tblDifficultyLevel.Select(x => new QuestionLevel
                 {
-                    NoOfQuestions = x.NoOfQuestions,
-                    QuestionLevelCode = x.QuestionLevelCode,
-                    QuestionLevelName = x.QuestionLevelName,
-                    QuestionLevelId = x.QuestionLevelId,
-                    SuccessRate = x.SuccessRate,
+                    CreatedOn = x.CreatedOn,
+                    LevelCode = x.LevelCode,
+                    PatternCode = x.PatternCode,
+                    LevelName = x.LevelName,
+                    LevelId = x.LevelId,
                     Status = x.Status
                 }).ToList();
 
@@ -94,7 +93,7 @@ namespace Config_API.Repositories.Services
         {
             try
             {
-                var data = _dbContext.tblDifficultyLevel.Where(x => x.QuestionLevelId == id).FirstOrDefault();
+                var data = _dbContext.tblDifficultyLevel.Where(x => x.LevelId == id).FirstOrDefault();
                 if (data != null)
                 {
                     return data;
@@ -113,13 +112,23 @@ namespace Config_API.Repositories.Services
         {
             try
             {
-                var data = _dbContext.tblDifficultyLevel.Where(x => x.QuestionLevelId == id).FirstOrDefault();
+                var data = _dbContext.tblDifficultyLevel.Where(x => x.LevelId == id).FirstOrDefault();
                 if (data != null)
                 {
-                    data.Status = false;
-                    _dbContext.tblDifficultyLevel.Update(data);
-                    _dbContext.SaveChanges();
-                    return true;
+                    if (data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblDifficultyLevel.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblDifficultyLevel.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
                 }
                 else
                 {

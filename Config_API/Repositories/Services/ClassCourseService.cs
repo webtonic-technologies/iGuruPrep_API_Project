@@ -28,8 +28,8 @@ namespace Config_API.Repositories.Services
 
                         var newClassCourseMapping = new ClassCourseMapping
                         {
-                            ClassID = request.CourseClassMappingID,
-                            CourseID = request.CourseClassMappingID,
+                            ClassID = request.ClassID,
+                            CourseID = request.CourseID,
                             CreatedOn = DateTime.Now,
                             Status = request.Status
                         };
@@ -53,7 +53,7 @@ namespace Config_API.Repositories.Services
                         data.CreatedOn = request.CreatedOn;
                         data.Status = request.Status;
                         data.ClassID = request.ClassID;
-                        data.CourseID = request.CourseClassMappingID;
+                        data.CourseID = request.CourseID;
 
 
                         _dbContext.tblClassCourses.Update(data);
@@ -128,10 +128,20 @@ namespace Config_API.Repositories.Services
                 var data = _dbContext.tblClassCourses.Where(x => x.CourseClassMappingID == id).FirstOrDefault();
                 if (data != null)
                 {
-                    data.Status = false;
-                    _dbContext.tblClassCourses.Update(data);
-                    _dbContext.SaveChanges();
-                    return true;
+                    if (data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblClassCourses.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblClassCourses.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
                 }
                 else
                 {

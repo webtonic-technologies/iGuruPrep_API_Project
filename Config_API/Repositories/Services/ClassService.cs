@@ -128,10 +128,21 @@ namespace iGuruPrep.Repositories.Services
                 var data = _dbContext.tblClass.Where(x => x.ClassId == id).FirstOrDefault();
                 if (data != null)
                 {
-                    data.Status = false;
-                    _dbContext.tblClass.Update(data);
-                    _dbContext.SaveChanges();
-                    return true;
+                    if(data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblClass.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblClass.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    
                 }
                 else
                 {

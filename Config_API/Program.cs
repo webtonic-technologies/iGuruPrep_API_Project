@@ -1,3 +1,4 @@
+using Config_API.Repositories.Interfaces;
 using Config_API.Repositories.Services;
 using iGuruPrep;
 using iGuruPrep.Repositories.Interfaces;
@@ -13,6 +14,7 @@ builder.Services.AddTransient<ISubjectService, SubjectService>();
 builder.Services.AddTransient<ICourseService, CourseService>();
 builder.Services.AddTransient<IStatusMessageService, StatusMessageService>();
 builder.Services.AddTransient<IClassCourseService, ClassCourseService>();
+builder.Services.AddTransient<IQuestionLevelService, QuestionLevelService>();
 // Add services to the container.
 
 // Add services to the container.

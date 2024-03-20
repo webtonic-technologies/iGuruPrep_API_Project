@@ -2,6 +2,6 @@
 
 public interface IStatusMessageService
 {
-    Task<StatusMessage> GetStatusMessageById(int id);
-    Task<string> AddUpdateStatusMessage(StatusMessage request);
+    Task<StatusMessages> GetStatusMessageById(int id);
+    Task<string> AddUpdateStatusMessage(StatusMessages request);
 }

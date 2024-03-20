@@ -14,7 +14,7 @@ public class StatusMessageController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUpdateStatusMessage(StatusMessage request)
+    public async Task<IActionResult> AddUpdateStatusMessage(StatusMessages request)
     {
         try 
         {

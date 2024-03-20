@@ -10,17 +10,17 @@ public class StatusMessageService : IStatusMessageService
         _dbContext = dbContext;
     }
 
-    public async Task<string> AddUpdateStatusMessage(StatusMessage request)
+    public async Task<string> AddUpdateStatusMessage(StatusMessages request)
     {
         try
         {
 
             if (request.StatusId == 0)
             {
-                var newStatusMessage = new StatusMessage
+                var newStatusMessage = new StatusMessages
                 {
-                   StatusCode = request.StatusId,
-                   StatusMessages = request.StatusMessages,
+                   StatusCode = request.StatusCode,
+                   StatusMessage = request.StatusMessage,
                 };
 
                 _dbContext.tblStatusMessage.Add(newStatusMessage);
@@ -33,8 +33,8 @@ public class StatusMessageService : IStatusMessageService
                 var data = _dbContext.tblStatusMessage.Where(x => x.StatusId == request.StatusId).FirstOrDefault();
                 if (data != null)
                 {
-                    data.StatusMessages = request.StatusMessages;
-                    data.StatusCode = request.StatusId;
+                    data.StatusMessage = request.StatusMessage;
+                    data.StatusCode = request.StatusCode;
 
                     _dbContext.tblStatusMessage.Update(data);
                     _dbContext.SaveChanges();
@@ -54,7 +54,7 @@ public class StatusMessageService : IStatusMessageService
         }
     }
 
-    public async Task<StatusMessage> GetStatusMessageById(int id)
+    public async Task<StatusMessages> GetStatusMessageById(int id)
     {
         try
         {
@@ -70,7 +70,7 @@ public class StatusMessageService : IStatusMessageService
         }
         catch (Exception ex)
         {
-            return new StatusMessage();
+            return new StatusMessages();
         }
     }
     // Implement methods defined in the interface
