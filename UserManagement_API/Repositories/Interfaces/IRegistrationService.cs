@@ -1,5 +1,4 @@
 ﻿using UserManagement_API.DTOs;
-using UserManagement_API.Models;
 
 namespace UserManagement_API.Repositories.Interfaces
 {

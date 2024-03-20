@@ -1,9 +1,11 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserManagement_API.Models
 {
     public class UserRegistration
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public int? PersonType { get; set; }
         public string UserCode { get; set; } = "ABCD1234";
@@ -37,8 +39,8 @@ namespace UserManagement_API.Models
         public string SchoolName { get; set; } = string.Empty;
         public string FcmDeviceID { get; set; } = string.Empty;
         public string DeviceType { get; set; } = string.Empty;
-        public string PaymentSucessHash { get; set; } = string.Empty;
-        public string PaymentFailureHash { get; set; } = string.Empty;
+        public byte[]? PaymentSucessHash { get; set; }
+        public byte[]? PaymentFailureHash { get; set; }
         public string RoleID { get; set; } = string.Empty;
         public string DesgnID { get; set; } = string.Empty;
     }

@@ -1,5 +1,4 @@
 ﻿using iGuruPrep;
-using System.Text;
 using UserManagement_API.DTOs;
 using UserManagement_API.Models;
 using UserManagement_API.Repositories.Interfaces;
@@ -56,7 +55,7 @@ namespace UserManagement_API.Repositories.Services
                         PersonType = request.PersonType,
                         RoleID = request.RoleID,
                         CreatedOn = DateTime.Now,
-                        CreatedBy = 1
+                        CreatedBy = 1,
                     };
 
                     _dbContext.tblUser.Add(newRegistration);
