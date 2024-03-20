@@ -1,3 +1,4 @@
+using Config_API.Repositories.Interfaces;
 using Config_API.Repositories.Services;
 using iGuruPrep;
 using iGuruPrep.Repositories.Interfaces;
@@ -7,12 +8,13 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<IBoardRepository, BoardRepository>();
-builder.Services.AddTransient<IClassRepository, ClassRepository>();
-builder.Services.AddTransient<ISubjectRepository, SubjectRepository>();
-builder.Services.AddTransient<ICourseRepository, CourseRepository>();
-builder.Services.AddTransient<IStatusMessageRepository, StatusMessageRepository>();
-builder.Services.AddTransient<IClassCourseRepository, ClassCourseRepository>();
+builder.Services.AddTransient<IBoardService, BoardService>();
+builder.Services.AddTransient<IClassService, ClassService>();
+builder.Services.AddTransient<ISubjectService, SubjectService>();
+builder.Services.AddTransient<ICourseService, CourseService>();
+builder.Services.AddTransient<IStatusMessageService, StatusMessageService>();
+builder.Services.AddTransient<IClassCourseService, ClassCourseService>();
+builder.Services.AddTransient<IQuestionLevelService, QuestionLevelService>();
 // Add services to the container.
 
 // Add services to the container.

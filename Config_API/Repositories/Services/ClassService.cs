@@ -1,13 +1,12 @@
 ﻿using iGuruPrep.Models;
 using iGuruPrep.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace iGuruPrep.Repositories.Services
 {
-    public class ClassRepository : IClassRepository
+    public class ClassService : IClassService
     {
         private readonly DbContextClass _dbContext;
-        public ClassRepository(DbContextClass dbContext)
+        public ClassService(DbContextClass dbContext)
         {
             _dbContext = dbContext;
         }
@@ -120,6 +119,39 @@ namespace iGuruPrep.Repositories.Services
             catch (Exception ex)
             {
                 return new Class();
+            }
+        }
+        public async Task<bool> StatusActiveInactive(int id)
+        {
+            try
+            {
+                var data = _dbContext.tblClass.Where(x => x.ClassId == id).FirstOrDefault();
+                if (data != null)
+                {
+                    if(data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblClass.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblClass.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

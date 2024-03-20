@@ -1,15 +1,14 @@
 ﻿
 using Config_API.Models;
 using iGuruPrep;
-using iGuruPrep.Models;
 
 namespace Config_API.Repositories.Services
 {
-    public class ClassCourseRepository : IClassCourseRepository
+    public class ClassCourseService : IClassCourseService
     {
         private readonly DbContextClass _dbContext;
 
-        public ClassCourseRepository(DbContextClass dbContext)
+        public ClassCourseService(DbContextClass dbContext)
         {
             _dbContext = dbContext;
         }
@@ -29,8 +28,8 @@ namespace Config_API.Repositories.Services
 
                         var newClassCourseMapping = new ClassCourseMapping
                         {
-                            ClassID = request.CourseClassMappingID,
-                            CourseID = request.CourseClassMappingID,
+                            ClassID = request.ClassID,
+                            CourseID = request.CourseID,
                             CreatedOn = DateTime.Now,
                             Status = request.Status
                         };
@@ -54,7 +53,7 @@ namespace Config_API.Repositories.Services
                         data.CreatedOn = request.CreatedOn;
                         data.Status = request.Status;
                         data.ClassID = request.ClassID;
-                        data.CourseID = request.CourseClassMappingID;
+                        data.CourseID = request.CourseID;
 
 
                         _dbContext.tblClassCourses.Update(data);
@@ -120,6 +119,38 @@ namespace Config_API.Repositories.Services
             catch (Exception ex)
             {
                 return new ClassCourseMapping();
+            }
+        }
+        public async Task<bool> StatusActiveInactive(int id)
+        {
+            try
+            {
+                var data = _dbContext.tblClassCourses.Where(x => x.CourseClassMappingID == id).FirstOrDefault();
+                if (data != null)
+                {
+                    if (data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblClassCourses.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblClassCourses.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
