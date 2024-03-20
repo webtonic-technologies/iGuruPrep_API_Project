@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using UserManagement_API.DTOs;
-using UserManagement_API.Models;
 using UserManagement_API.Repositories.Interfaces;
 
 namespace UserManagement_API.Controllers

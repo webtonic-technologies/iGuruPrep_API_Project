@@ -9,10 +9,8 @@
         public string PhoneNumber { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-
         public IFormFile? Photo { get; set; } = null;
         public string SchoolCode { get; set; } = string.Empty;
-        // ,[CurrentToken]
         public bool? Status { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
