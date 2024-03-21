@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Schools_API.Models;
-using System.Security.Claims;
 
 namespace Schools_API
 {

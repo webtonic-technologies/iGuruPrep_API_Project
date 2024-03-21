@@ -1,7 +1,4 @@
-﻿using Course_API.Repositories;
-using Microsoft.EntityFrameworkCore;
-
-namespace Course_API.Repositories.Interface
+﻿namespace Course_API.Repositories.Interface
 {
     public interface IUnitOfWork
     {

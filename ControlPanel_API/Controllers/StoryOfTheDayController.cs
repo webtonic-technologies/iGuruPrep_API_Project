@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ControlPanel_API.DTOs;
+﻿using ControlPanel_API.DTOs;
 using ControlPanel_API.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ControlPanel_API.Controllers
 {

@@ -2,7 +2,6 @@
 using ControlPanel_API.DTOs;
 using ControlPanel_API.Models;
 using ControlPanel_API.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace ControlPanel_API.Repositories.Services
 {

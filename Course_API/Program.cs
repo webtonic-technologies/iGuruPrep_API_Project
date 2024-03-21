@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using Course_API.DBContext;
 using Course_API.Repositories;
 using Course_API.Repositories.Interface;
 using Course_API.Services;
 using Course_API.Services.Interace;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

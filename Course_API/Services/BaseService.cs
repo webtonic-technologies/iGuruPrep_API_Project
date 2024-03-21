@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Course_API.Repositories.Interface;
+﻿using Course_API.Repositories.Interface;
 using Course_API.Services.Interace;
-using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
 {

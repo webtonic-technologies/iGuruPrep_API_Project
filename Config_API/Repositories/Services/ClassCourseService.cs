@@ -1,5 +1,4 @@
-﻿
-using Config_API.Models;
+﻿using Config_API.Models;
 using iGuruPrep;
 
 namespace Config_API.Repositories.Services

@@ -1,7 +1,6 @@
 ﻿using ControlPanel_API.DBContext;
 using ControlPanel_API.Models;
 using ControlPanel_API.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControlPanel_API.Controllers

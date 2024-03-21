@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Course_API.DTOs;
 using Course_API.Models;
-using Course_API.Services;
-using Course_API.DTOs;
 using Course_API.Services.Interace;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Course_API.Controllers
 {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using Course_API.DBContext;
+﻿using Course_API.DBContext;
 using Course_API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Course_API.Repositories
 {

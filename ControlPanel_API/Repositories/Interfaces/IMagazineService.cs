@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ControlPanel_API.DTOs;
+﻿using ControlPanel_API.DTOs;
 
 namespace ControlPanel_API.Repositories.Interfaces
 {

@@ -1,11 +1,8 @@
-﻿using Azure.Core;
-using ControlPanel_API.DBContext;
+﻿using ControlPanel_API.DBContext;
 using ControlPanel_API.Models;
 using ControlPanel_API.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Net.NetworkInformation;
 
 namespace ControlPanel_API.Repositories.Services
 {

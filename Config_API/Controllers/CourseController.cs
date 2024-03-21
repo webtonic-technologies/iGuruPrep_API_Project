@@ -1,5 +1,4 @@
 ﻿// BoardsController.cs
-using Config_API.Repositories.Services;
 using iGuruPrep.Models;
 using iGuruPrep.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
