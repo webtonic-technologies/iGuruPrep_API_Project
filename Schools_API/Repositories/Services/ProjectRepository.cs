@@ -95,6 +95,10 @@ namespace Schools_API.Repositories.Services
                     }
                     imagePath = fileName; // Set the path where the image is saved
                 }
+                else
+                {
+                    imagePath = string.Empty;
+                }
 
                 var project = new Project
                 {

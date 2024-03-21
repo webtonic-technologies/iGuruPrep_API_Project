@@ -11,6 +11,6 @@
         public int BoardId { get; set; }
         public int SubjectId { get; set; }
         public string CreatedBy { get; set; }
-        public IFormFile image { get; set; }
+        public IFormFile? image { get; set; }
     }
 }
