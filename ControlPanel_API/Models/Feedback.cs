@@ -4,7 +4,7 @@
     {
         public int FeedbackID { get; set; }
         public string FeedbackDesc { get; set; } = string.Empty;
-        public int? Rating { get; set; }
+        public Decimal? Rating { get; set; }
         public int? FeedbackTypeID { get; set; }
         public int? UserID { get; set; }
         public int? SyllabusID { get; set; }
