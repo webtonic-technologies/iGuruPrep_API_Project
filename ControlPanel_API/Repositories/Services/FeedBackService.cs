@@ -41,6 +41,37 @@ namespace ControlPanel_API.Repositories.Services
                 throw ex;
             }
         }
+        public async Task<string> AddSyllabus (Syllabus request)
+        {
+            try
+            {
+                var newSyllabus = new Syllabus
+                {
+                   CreatedOn = DateTime.Now,
+                   BoardID = request.BoardID,
+                   ClassId = request.ClassId,
+                   CourseId = request.CourseId,
+                   CreatedBy = request.CreatedBy,
+                   Description = request.Description,
+                   ModifiedBy = request.ModifiedBy,
+                   ModifiedOn = request.ModifiedOn,
+                   SyllabusId = request.SyllabusId,
+                   Status = request.Status,
+                   SyllabusName = request.SyllabusName,
+                   YearID = request.YearID
+                   
+                };
+
+                _context.tblSyllabus.Add(newSyllabus);
+                _context.SaveChanges();
+
+                return "Syllabus added successfully";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public async Task<List<GetAllFeedbackResponse>> GetAllFeedBackList(GetAllFeedbackRequest request)
         {
             try
