@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ControlPanel_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("iGuru/[controller]")]
     [ApiController]
     public class MagazineController : ControllerBase
     {

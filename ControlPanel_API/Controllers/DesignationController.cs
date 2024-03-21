@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ControlPanel_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("iGuru/[controller]")]
     [ApiController]
     public class DesignationController : ControllerBase
     {
