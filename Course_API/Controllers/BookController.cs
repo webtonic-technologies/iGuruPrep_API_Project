@@ -7,7 +7,7 @@ using Course_API.Services.Interace;
 
 namespace Course_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("iGuru/[controller]")]
     [ApiController]
     public class BookController : ControllerBase
     {
