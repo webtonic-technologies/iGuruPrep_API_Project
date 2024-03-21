@@ -67,5 +67,28 @@ namespace ControlPanel_API.Controllers
             }
 
         }
+        [HttpPost("AddSyllabus")]
+        public async Task<IActionResult> AddSyllabus(Syllabus request)
+        {
+            try
+            {
+                var data = await _feedbackService.AddSyllabus(request);
+                if (data != null)
+                {
+                    return Ok(data);
+
+                }
+                else
+                {
+                    return BadRequest("Bad Request");
+                }
+
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+
+        }
     }
 }

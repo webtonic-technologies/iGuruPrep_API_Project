@@ -6,6 +6,7 @@ namespace ControlPanel_API.Repositories.Interfaces
     public interface IFeedBackService
     {
         Task<string> AddFeedBack(Feedback request);
+        Task<string> AddSyllabus(Syllabus request);
         Task<List<GetAllFeedbackResponse>> GetAllFeedBackList(GetAllFeedbackRequest request);
     }
 }

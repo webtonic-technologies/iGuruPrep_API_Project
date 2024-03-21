@@ -4,7 +4,7 @@
     {
        public string Name { get; set; } = string.Empty;
         public string FeedBackDesc { get; set; } = string.Empty;
-        public int? Rating {  get; set; }
+        public Decimal? Rating {  get; set; }
         public DateTime? Date { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
         public string Email {  get; set; } = string.Empty;  
