@@ -53,6 +53,10 @@ namespace ControlPanel_API.Repositories.Services
                 }
                 storyOfTheDay.UploadImage = fileName;
             }
+            else
+            {
+                storyOfTheDay.UploadImage = string.Empty;
+            }
 
             await _context.tblSOTD.AddAsync(storyOfTheDay);
             await _context.SaveChangesAsync();
@@ -141,7 +145,7 @@ namespace ControlPanel_API.Repositories.Services
                 throw new Exception("Story of the day not found");
 
             var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Assets", "StoryOfTheDay", storyOfTheDay.UploadImage);
-            if (File.Exists(filePath))
+            if (File.Exists(filePath) && !string.IsNullOrWhiteSpace(storyOfTheDay.UploadImage))
             {
                 File.Delete(filePath);
             }
