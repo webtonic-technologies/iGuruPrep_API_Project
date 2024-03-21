@@ -1,4 +1,5 @@
 ﻿// BoardsController.cs
+using Config_API.Repositories.Services;
 using iGuruPrep.Models;
 using iGuruPrep.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class CourseController : ControllerBase
 {
-    private readonly ICourseRepository _courseRepository;
+    private readonly ICourseService _courseService;
 
-    public CourseController(ICourseRepository courseRepository)
+    public CourseController(ICourseService courseService)
     {
-        _courseRepository = courseRepository;
+        _courseService = courseService;
     }
 
     [HttpPost]
@@ -19,7 +20,7 @@ public class CourseController : ControllerBase
     {
         try 
         {
-            var data = await _courseRepository.AddUpdateCourse(request);
+            var data = await _courseService.AddUpdateCourse(request);
             if(data != null)
             {
                 return Ok(data);
@@ -42,7 +43,7 @@ public class CourseController : ControllerBase
     {
         try
         {
-            var data = await _courseRepository.GetAllCourses();
+            var data = await _courseService.GetAllCourses();
             if (data != null)
             {
                 return Ok(data);
@@ -65,7 +66,30 @@ public class CourseController : ControllerBase
     {
         try
         {
-            var data = await _courseRepository.GetCourseById(CourseId);
+            var data = await _courseService.GetCourseById(CourseId);
+            if (data != null)
+            {
+                return Ok(data);
+
+            }
+            else
+            {
+                return BadRequest("Bad Request");
+            }
+
+        }
+        catch (Exception e)
+        {
+            return this.BadRequest(e.Message);
+        }
+
+    }
+    [HttpPut("Status/{CourseId}")]
+    public async Task<IActionResult> StatusActiveInactive(int CourseId)
+    {
+        try
+        {
+            var data = await _courseService.StatusActiveInactive(CourseId);
             if (data != null)
             {
                 return Ok(data);
