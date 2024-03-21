@@ -1,7 +1,11 @@
-﻿namespace Config_API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Config_API.Models
 {
     public class ClassCourseMapping
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseClassMappingID { get; set; }
         public int? CourseID { get; set; }
         public int? ClassID { get; set; }

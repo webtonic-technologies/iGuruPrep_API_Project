@@ -1,23 +1,12 @@
-using Config_API.Repositories.Interfaces;
-using Config_API.Repositories.Services;
 using iGuruPrep;
-using iGuruPrep.Repositories.Interfaces;
-using iGuruPrep.Repositories.Services;
 using Microsoft.EntityFrameworkCore;
+using UserManagement_API.Repositories.Interfaces;
+using UserManagement_API.Repositories.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<IBoardService, BoardService>();
-builder.Services.AddTransient<IClassService, ClassService>();
-builder.Services.AddTransient<ISubjectService, SubjectService>();
-builder.Services.AddTransient<ICourseService, CourseService>();
-builder.Services.AddTransient<IStatusMessageService, StatusMessageService>();
-builder.Services.AddTransient<IClassCourseService, ClassCourseService>();
-builder.Services.AddTransient<IQuestionLevelService, QuestionLevelService>();
-// Add services to the container.
-
-// Add services to the container.
+builder.Services.AddTransient<IRegistrationService, RegistrationService>();
 builder.Services.AddDbContext<DbContextClass>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();

@@ -1,14 +1,12 @@
-﻿using Azure.Core;
-using iGuruPrep.Models;
+﻿using iGuruPrep.Models;
 using iGuruPrep.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace iGuruPrep.Repositories.Services
 {
-    public class SubjectRepository : ISubjectRepository
+    public class SubjectService : ISubjectService
     {
         private readonly DbContextClass _dbContext;
-        public SubjectRepository(DbContextClass dbContext)
+        public SubjectService(DbContextClass dbContext)
         {
             _dbContext = dbContext;
         }
@@ -131,6 +129,38 @@ namespace iGuruPrep.Repositories.Services
             catch (Exception ex)
             {
                 return new Subject();
+            }
+        }
+        public async Task<bool> StatusActiveInactive(int id)
+        {
+            try
+            {
+                var data = _dbContext.tblSubject.Where(x => x.SubjectId == id).FirstOrDefault();
+                if (data != null)
+                {
+                    if (data.Status == true)
+                    {
+                        data.Status = false;
+                        _dbContext.tblSubject.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        data.Status = true;
+                        _dbContext.tblSubject.Update(data);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
